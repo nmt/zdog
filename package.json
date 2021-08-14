@@ -1,0 +1,22 @@
+{
+  "name": "zdog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmt/zdog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmt/zdog/issues"
+  },
+  "homepage": "https://github.com/nmt/zdog#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
