@@ -291,10 +291,7 @@ hairSide.copyGraph({
     y: Zdog.TAU / 6.6,
     z: Zdog.TAU / 1
   }
-}); // let hairTop = hair.copyGraph({
-//   rotate: { y: Zdog.TAU / -2 },
-// });
-
+});
 var bun = new Zdog.Shape({
   addTo: hair,
   stroke: 35,
@@ -313,6 +310,9 @@ var sleevePuff = new Zdog.Shape({
     x: 0,
     y: 30,
     z: 0
+  },
+  rotate: {
+    y: Zdog.TAU / 12
   }
 });
 var sleeveCuff = new Zdog.Ellipse({
@@ -326,15 +326,8 @@ var sleeveCuff = new Zdog.Ellipse({
     z: 15
   }
 });
-sleevePuff.copyGraph({
-  translate: {
-    x: 0,
-    y: -30,
-    z: 0
-  }
-});
 var arm = new Zdog.Shape({
-  addTo: top,
+  addTo: sleevePuff,
   path: [{
     x: 10
   }, {
@@ -342,7 +335,7 @@ var arm = new Zdog.Shape({
   }],
   translate: {
     x: 0,
-    y: 30,
+    y: 0,
     z: 35
   },
   color: SKIN_COLOUR,
@@ -369,11 +362,14 @@ var forearm = new Zdog.Shape({
     y: Zdog.TAU / 4
   }
 });
-arm.copyGraph({
+var sleeveAndArmTwo = sleevePuff.copyGraph({
   translate: {
     x: 0,
     y: -30,
-    z: 35
+    z: 0
+  },
+  rotate: {
+    y: Zdog.TAU / -5
   }
 });
 var leg = new Zdog.Shape({
