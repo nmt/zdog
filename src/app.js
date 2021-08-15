@@ -1,8 +1,8 @@
 const SKIN_COLOUR = "#f7ebd5";
 const DRESS_COLOUR = "pink";
 const CUFF_COLOUR = "white";
+const BOW_COLOUR = "red";
 
-// let isSpinning = false;
 let isSpinning = true;
 
 let illo = new Zdog.Illustration({
@@ -11,25 +11,44 @@ let illo = new Zdog.Illustration({
   onDragStart: function () {
     isSpinning = false;
   },
-  // rotate: { x: Zdog.TAU / 9 },
+  rotate: { z: Zdog.TAU / -1.1 },
   // y is just which frame of the animation it starts at
 });
 
-let skirt = new Zdog.Cone({
+let top = new Zdog.Cone({
   addTo: illo,
+  diameter: 40,
+  length: 70,
+  stroke: 20,
+  color: DRESS_COLOUR,
+  translate: { x: 0, y: -80, z: -50 },
+  rotate: { x: Zdog.TAU / -4 },
+});
+
+let skirt = new Zdog.Cone({
+  addTo: top,
   diameter: 60,
   length: 50,
   stroke: 20,
   color: DRESS_COLOUR,
-  translate: { x: -30, y: -10, z: 0 },
-  rotate: { x: Zdog.TAU / 3, y: Zdog.TAU / -9 },
+  translate: { x: 0, y: 0, z: 90 },
+  rotate: { x: Zdog.TAU / 2 },
 });
 
-let top = skirt.copyGraph({
-  diameter: 40,
-  length: 70,
-  translate: { x: 0, y: -80, z: -50 },
-  rotate: { x: Zdog.TAU / -6 },
+let bowHalf = new Zdog.Polygon({
+  addTo: skirt,
+  radius: 12,
+  sides: 3,
+  stroke: 10,
+  fill: true,
+  color: BOW_COLOUR,
+  translate: { x: -20, y: -15, z: 45 },
+  rotate: { x: Zdog.TAU / 6, y: Zdog.TAU / 4 },
+});
+
+let bowSecondHalf = bowHalf.copyGraph({
+  translate: { x: -20, y: 15, z: 45 },
+  rotate: { x: Zdog.TAU / 6, y: Zdog.TAU / 4, z: Zdog.TAU / 6 },
 });
 
 let head = new Zdog.Shape({
@@ -63,23 +82,39 @@ let glassesBridge = new Zdog.Shape({
 let hair = new Zdog.Shape({
   addTo: head,
   stroke: 65,
-  color: "black",
+  color: "transparent",
   translate: { x: -5, y: 0, z: -10 },
 });
 
-// let hair = new Zdog.Hemisphere({
-//   addTo: head,
-//   diameter: 70,
-//   stroke: 5,
-//   color: "red",
-//   backface: "red",
-//   translate: { x: -5, y: 0, z: -10 },
-//   rotate: { y: Zdog.TAU / 4 },
-// });
-
-let hairTop = hair.copyGraph({
-  rotate: { y: Zdog.TAU / -2 },
+let hairTop = new Zdog.Hemisphere({
+  addTo: head,
+  diameter: 65,
+  stroke: 5,
+  color: "black",
+  backface: "black",
+  translate: { x: -5, y: 0, z: -10 },
+  rotate: { y: Zdog.TAU / 2.4 },
 });
+
+let hairSide = new Zdog.Hemisphere({
+  addTo: head,
+  diameter: 65,
+  stroke: 5,
+  color: "black",
+  backface: "black",
+  translate: { x: -5, y: 0, z: -10 },
+  rotate: { x: Zdog.TAU / 7, y: Zdog.TAU / 3.3 },
+});
+
+hairSide.copyGraph({
+  color: "black",
+  backface: "black",
+  rotate: { x: Zdog.TAU / 4, y: Zdog.TAU / 6.6, z: Zdog.TAU / 1 },
+});
+
+// let hairTop = hair.copyGraph({
+//   rotate: { y: Zdog.TAU / -2 },
+// });
 
 let bun = new Zdog.Shape({
   addTo: hair,
@@ -132,7 +167,7 @@ arm.copyGraph({
 let leg = new Zdog.Shape({
   addTo: skirt,
   path: [{ x: 20 }, { y: 0 }],
-  translate: { x: 10, y: 10, z: -10 },
+  translate: { x: 10, y: 10, z: -15 },
   color: SKIN_COLOUR,
   stroke: 20,
   rotate: { y: Zdog.TAU / -4 },
@@ -140,8 +175,8 @@ let leg = new Zdog.Shape({
 
 let calf = new Zdog.Shape({
   addTo: leg,
-  path: [{ x: 20 }, { y: 0 }],
-  translate: { x: 30, y: 0, z: 0 },
+  path: [{ x: 25 }, { y: 0 }],
+  translate: { x: 25, y: 0, z: 0 },
   color: SKIN_COLOUR,
   stroke: 20,
   rotate: { y: Zdog.TAU / -8 },
@@ -149,6 +184,7 @@ let calf = new Zdog.Shape({
 
 leg.copyGraph({
   translate: { x: -15, y: -15, z: -10 },
+  rotate: { y: Zdog.TAU / -3 },
 });
 
 illo.updateRenderGraph();
